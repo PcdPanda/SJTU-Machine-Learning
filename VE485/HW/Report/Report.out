@@ -1,0 +1,21 @@
+\BOOKMARK [1][-]{section.1}{Background}{}% 1
+\BOOKMARK [1][-]{section.2}{Linear SVM}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Hard Margin}{section.2}% 3
+\BOOKMARK [2][-]{subsection.2.2}{Soft Margin}{section.2}% 4
+\BOOKMARK [1][-]{section.3}{Nonlinear SVM}{}% 5
+\BOOKMARK [2][-]{subsection.3.1}{Kernel Method}{section.3}% 6
+\BOOKMARK [1][-]{section.4}{Application and Issue}{}% 7
+\BOOKMARK [1][-]{section.5}{Frontiers}{}% 8
+\BOOKMARK [2][-]{subsection.5.1}{Sub-gradient Descent}{section.5}% 9
+\BOOKMARK [2][-]{subsection.5.2}{Coordinate descent}{section.5}% 10
+\BOOKMARK [2][-]{subsection.5.3}{Multiclass SVM}{section.5}% 11
+\BOOKMARK [2][-]{subsection.5.4}{Support Vector Clustering}{section.5}% 12
+\BOOKMARK [2][-]{subsection.5.5}{Regression}{section.5}% 13
+\BOOKMARK [2][-]{subsection.5.6}{Bayesian SVM}{section.5}% 14
+\BOOKMARK [2][-]{subsection.5.7}{Probabilistic SVM}{section.5}% 15
+\BOOKMARK [2][-]{subsection.5.8}{Least Square SVM, LS-SVM}{section.5}% 16
+\BOOKMARK [1][-]{section.6}{Problem}{}% 17
+\BOOKMARK [1][-]{section.7}{Solution}{}% 18
+\BOOKMARK [2][-]{subsection.7.1}{Supervised Classification SVM}{section.7}% 19
+\BOOKMARK [2][-]{subsection.7.2}{Unsupervisied Classification PCA}{section.7}% 20
+\BOOKMARK [1][-]{section.8}{Conclusion}{}% 21

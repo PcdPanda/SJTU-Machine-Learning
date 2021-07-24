@@ -1,0 +1,151 @@
+\documentclass{article}
+\usepackage{mathrsfs}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{color}
+%\include{macros}
+%\usepackage{floatflt}
+%\usepackage{graphics}
+%\usepackage{epsfig}
+
+\newcommand{\reals}{{\mathbb{R}}}
+\newcommand{\dom}{{\bf{dom}}}
+\newcommand{\symm}{{\bf{S}}}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem*{defition}{Definition}
+\newtheorem*{example}{Example}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem*{exercise}{Exercise}
+
+\setlength{\oddsidemargin}{-0.25 in}
+\setlength{\evensidemargin}{-0.25 in} \setlength{\topmargin}{-0.25
+in} \setlength{\textwidth}{7 in} \setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.25 in} \setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+
+\newcommand{\homework}[4]{
+\pagestyle{myheadings} \thispagestyle{plain}
+\newpage
+\setcounter{page}{1} \setcounter{section}{#4} \noindent
+\begin{center}
+\framebox{ \vbox{\vspace{2mm} \hbox to 6.28in { {\bf
+VE485,~Optimization~in~Machine~Learning (Summer 2020) \hfill Homework: #1} }
+\vspace{6mm} \hbox to 6.28in { {\Large \hfill #1 \hfill} }
+\vspace{6mm} \hbox to 6.28in { {\it Lecturer: #2 \hfill} }
+\vspace{2mm} \hbox to 6.28in { {\it Student: #3 \hfill} }
+\vspace{2mm} } }
+\end{center}
+\markboth{#1}{#1} \vspace*{4mm} }
+
+
+\begin{document}
+
+\homework{1. Convex Set}{Xiaolin Huang \hspace{5mm} {\tt
+xiaolinhuang@sjtu.edu.cn}}{Chongdan Pan
+\hspace{5mm} {\tt panddddda@sjtu.edu.cn } }{9}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Section 2.  Problem
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Problem 1} \label{ex-midpoint-cvx}
+\emph{Midpoint convexity.}
+A set $C$ is \emph{midpoint convex} if whenever two points $a,b$ are in $C$, the average or midpoint $(a+b)/2$ is in $C$.  Obviously a convex set is midpoint convex. It can be proved that under mild conditions midpoint convexity implies convexity. As a simple case, prove that if $C$ is closed and midpoint convex, then $C$ is convex.
+
+\bf{Answer.
+\\\\Assume \emph{C} is a closed midpoint convex. 
+\\If $C$ only has one boundary point $a$, then $C$ also has only one element $a=2a/2$.
+\\\\When $C$ has two boundary points $a,b$, then $(a+b)/2, (3a+b)/4, (a+3b)/4, (7a+b)/8, (3a+5b)/8\cdots\in\emph{C}$ 
+\\Therefore, $\forall x\in\emph{C},x=\sigma/2^n\cdot a+(1-\sigma/2^n)b\in\emph{C}$ where $\sigma\in N, 0\leq\sigma\leq2^n$
+\\\\Let $z=\theta x_1+(1-\theta)x_2$ where $x_1,x_2\in\emph{C}, 0\leq\theta\leq1, \theta\in R$
+\\Then $z=[\theta\sigma_1/2^{n_1}+(1-\theta)\sigma_2/2^{n_2}]a+[\theta(1-\sigma_1/2^{n_1})+(1-\theta)(1-\sigma_2/2^{n_2})]b$
+\\Therefore, $z=\gamma a+(1-\gamma)b$ where $\gamma=\theta\sigma_1/2^{n_1}+(1-\theta)\sigma_2/2^{n_2}$
+\\Since $0\leq\gamma\leq1$, $\gamma$ can be represented in the form of $\sigma_{\gamma}/2^{n_\gamma}$ where $n_\gamma\in N,\sigma_{\gamma}\in N,0\leq\sigma_{\gamma}\leq2^{n_\gamma}$
+\\$z=\sigma_{\gamma}/2^{n_\gamma}\cdot a+(1-\sigma_{\gamma}/2^{n_\gamma})b$
+\\\\As a result, $z\in C$ and \emph{C} is a convex. It still applies when $C$ has more than 2 boundary points.
+}
+
+
+\section*{Problem 2}\label{e-lin-frac-image}%
+\emph{Linear-fractional functions and convex sets.}
+Let $f:\reals^m \rightarrow \reals^n$ be the linear-fractional function 
+\[
+f(x) = (Ax+b)/(c^T x+ d), \qquad \dom f = \{x \;|\; c^Tx+d >0\}.
+\]
+In this problem we study the inverse image of a convex set $C$ under $f$, i.e.,
+\[
+f^{-1} (C) = \{ x \in \dom f \;|\; f(x) \in C \}.
+\]
+For each of the following sets $C\subseteq \reals^n$, give a simple
+description of $f^{-1}(C)$.
+
+\begin{enumerate}
+\item The halfspace $C = \{ y \; | \; g^Ty \leq h\}$ (with $g\neq 0$).
+
+\item The polyhedron $C = \{y \; | \; Gy \preceq h\}$.
+
+\item The ellipsoid $\{ y \;|\; y^T P^{-1} y \leq 1 \}$ (where $P \in \symm^n_{++}$).
+
+\item The solution set of a linear matrix inequality, $C = \{y\; |\; y_1 A_1+ \cdots + y_n A_n \preceq B\}$, where $A_1$, \ldots, $A_n$, $B \in \symm^p$.
+\end{enumerate}
+
+\bf{Answer.
+\\\\
+$f^{-1}(x)=P[RP^{-1}(x)]$ where $P(x)$ is a perspective function and $R:\reals^{n+1} \rightarrow \reals^{m+1}$
+\\\\Let $Q=   \left(
+                \begin{array}{cc}
+                    A & b\\
+                    c^T & d\\ 
+                \end{array}
+            \right)\in\reals^{(m+1)\times(n+1)}$, then if $m>n$ let $R=(Q^TQ)^{-1}Q^T$
+\\\\Then $f^{-1}(x)$ is also a linear-fractional function, which conserves convexity.
+\\\\ \begin{enumerate}
+    \item $$f^{-1}(C)=\{x\in\dom f|g^T f(x)\leq h\}$$
+    $$f^{-1}(C)=\{x\in\dom f|g^T(Ax+b)/(c^T x+d)\leq h\}$$ 
+    $$f^{-1}(C)=\{x\in\dom f|(g^T A-hc^T)x\leq hd-g^T b\}$$ 
+    $$f^{-1}(C)=\{x\in\dom f|(A^Tg-ch^T)^Tx\leq hd-g^T b\}$$ 
+    Let $g'=A^Tg-ch^T,h'=hd-g^T$
+    \\The inverse image is the intersection of a halfspace and domain: $\{x|g'^Tf(x)\leq h'\}\cap\dom f$.
+    \item $$f^{-1}(C)=\{x\in\dom f|Gf(x)\preceq h\}$$
+    $$f^{-1}(C)=\{x\in\dom f|G(Ax+b)/(c^T x+d)\preceq h\}$$
+    $$f^{-1}(C)=\{x\in\dom f|(GA-hc^T)x\preceq hd-Gb\}$$
+    Let $G'=GA-hc^T,h'=hd-Gb$
+    \\The inverse image is the intersection of a polyhedron and domain: $\{x|G'x\preceq h'\}\cap\dom f$.
+    \item $$f^{-1}(C)=\{x\in\dom f|f(x)^T P^{-1}f(x)\leq1\}$$
+    $$f^{-1}(C)=\{x\in\dom f|(\frac{(Ax+b)^T}{c^T x+d}) P^{-1}\frac{Ax+b}{c^T x+d}\leq1\}$$
+    $$f^{-1}(C)=\{x\in\dom f|(Ax+b)^T P^{-1}(Ax+b)\leq(c^T x+d)^2\}$$
+    $$f^{-1}(C)=\{x\in\dom f|[x^T(A^T P^{-1}A)x+b^TP^{-1}Ax+x^TA^T P^{-1}b+b^TP^{-1}b]\leq(x^Tcc^Tx+dc^Tx+x^Tdc+d^2\}$$
+    $$f^{-1}(C)=\{x\in\dom f|[x^T(A^T P^{-1}A-cc^T)x+(b^TP^{-1}A-dc^T)x+x^T(A^T P^{-1}b-dc)]\leq d^2-b^T P^{-1}b\}$$
+    $$f^{-1}(C)=\{x\in\dom f|(x+x_c)^TP'^{-1}(x+x_c)\leq d^2-b^T P^{-1}b+x_c^2\}$$
+    where $P'^{-1}=A^T P^{-1}A-cc^T,x_c=P'(A^T P^{-1}b-dc)$
+    \\Then $f^{-1}(C)=\{x\in\dom f|(x+x_c)^TM^{-1}(x+x_c)\leq 1\}$
+    \\where $M^{-1}=\frac{P'^{-1}}{d^2-b^T P^{-1}b+x_c^2}$
+    \\\\The inverse image is the intersection of a ellipsoid and domain: $\{x|(x+x_c)^TM^{-1}(x+x_c)\leq 1\}\cap\dom f$ (where $M \in \symm^n_{++}$).
+    \item $$f^{-1}(C)=\{x_1 \cdots x_n\in\dom f|(a_1x+b_1)A_1+ \cdots + (a_nx+b_n)A_n \preceq B(c^T x+d)\}$$
+    \\ where $a_i$ represents for $A$ in $(Ax+b)/(c^Tx+d)$
+    $$f^{-1}(C)=\{x_1 \cdots x_m\in\dom f|x_1 A'_1+ \cdots + x_m A'_m \preceq B'\}$$
+    \\The inverse image is the solution set of a linear matrix inequality and domain: $\{x|x_1 A'_1+ \cdots + x_m A'_m \preceq B'\}\cap\dom f$ (where $A'_i\in \symm^p$, $B'=Bd-b_1A_1-\cdots-b_nA_n)$
+\end{enumerate}
+}
+
+\section*{Problem 3}\label{exe-sep-hyp-strict-counterexample}
+Give an example of two closed convex sets that are disjoint but cannot be strictly separated.
+
+\bf{$\{(x,y)|y\geq2^x\}$ and $\{(x,y)|y\leq0\}$}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Reference
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}

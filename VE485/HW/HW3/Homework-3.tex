@@ -1,0 +1,169 @@
+\documentclass{article}
+\usepackage{mathrsfs}
+\usepackage{amsmath}
+\usepackage{amsthm}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{color}
+%\include{macros}
+%\usepackage{floatflt}
+%\usepackage{graphics}
+%\usepackage{epsfig}
+\usepackage{float}%稳定图片位置
+\usepackage{graphicx}%画图
+\newcommand{\reals}{{\mathbb{R}}}
+\newcommand{\dom}{{\bf{dom}}}
+\newcommand{\symm}{{\bf{S}}}
+\newcommand{\Tr}{{\bf{tr}}}
+
+\theoremstyle{definition}
+\newtheorem{theorem}{Theorem}[section]
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem*{defition}{Definition}
+\newtheorem*{example}{Example}
+
+\theoremstyle{remark}
+\newtheorem*{remark}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem*{exercise}{Exercise}
+
+\setlength{\oddsidemargin}{-0.25 in}
+\setlength{\evensidemargin}{-0.25 in} \setlength{\topmargin}{-0.25
+in} \setlength{\textwidth}{7 in} \setlength{\textheight}{8.5 in}
+\setlength{\headsep}{0.25 in} \setlength{\parindent}{0 in}
+\setlength{\parskip}{0.1 in}
+
+\newcommand{\homework}[4]{
+\pagestyle{myheadings} \thispagestyle{plain}
+\newpage
+\setcounter{page}{1} \setcounter{section}{#4} \noindent
+\begin{center}
+\framebox{ \vbox{\vspace{2mm} \hbox to 6.28in { {\bf
+VE485,~Optimization~in~Machine~Learning (Summer 2020) \hfill Homework: #1} }
+\vspace{6mm} \hbox to 6.28in { {\Large \hfill #1 \hfill} }
+\vspace{6mm} \hbox to 6.28in { {\it Lecturer: #2 \hfill} }
+\vspace{2mm} \hbox to 6.28in { {\it Student: #3 \hfill} }
+\vspace{2mm} } }
+\end{center}
+\markboth{#1}{#1} \vspace*{4mm} }
+
+
+\begin{document}
+
+\homework{3. Convex Optimization}{Xiaolin Huang \hspace{5mm} {\tt
+xiaolinhuang@sjtu.edu.cn}}{Chongdan Pan
+\hspace{5mm} {\tt panddddda@sjtu.edu.cn } }{9}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Section 2.  Problem
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section*{Problem 1} \label{ex-midpoint-cvx}
+Consider the following \emph{Square LP},
+\[
+\begin{array}{ll}
+\mbox{minimize}   & c^T x \\
+\mbox{subject to} & Ax \preceq b,
+\end{array}
+\]
+with $A$ square and nonsingular.
+Show that the optimal value is given by
+\[
+p^\star = \left\{ \begin{array}{ll}
+ c^TA^{-1}b & A^{-T}c \preceq 0 \\
+ -\infty & \mbox{�������} \end{array} \right.
+\]
+
+{\bf{Answer:
+\\$p^\star=c^TA^{-1}(Ax)=(A^{-T}c)^T(Ax)$
+\\When $A^{-T}c\succ0$, $p^\star=-\infty$ when $Ax=-\infty$
+\\When $A^{-T}c\preceq0$, $p^\star=c^TA^{-1}b$ when $Ax=b$
+}}
+
+
+\section*{Problem 2}\label{e-lin-frac-image}%
+\emph{Relaxation of Boolean LP.}
+In a \emph{Boolean linear program}, the variable $x$ is constrained
+to have components equal to zero or one:
+\begin{equation} \label{e-bool-lp}
+\begin{array}{ll}
+\mbox{minimize} & c^T x \\
+\mbox{subject to} & Ax \preceq b \\
+& x_i \in \{0,1 \}, \quad i=1,\ldots,n.
+\end{array}
+\end{equation}
+In general, such problems are very difficult to solve, even
+though the feasible set is finite (containing at most $2^n$ points).
+
+In a general method called \emph{relaxation}, the constraint that
+$x_i$ be zero or one is replaced with the
+linear inequalities $0\leqslant x_i \leqslant 1$:
+\begin{equation} \label{e-bool-lp-relax}
+\begin{array}{ll}
+\mbox{minimize} & c^T x \\
+\mbox{subject to} & Ax \preceq b\\
+& 0 \leqslant x_i \leqslant 1, \quad i=1,\ldots,n.
+\end{array}
+\end{equation}
+We refer to this problem as the \emph{LP relaxation} of the
+Boolean LP~(\ref{e-bool-lp}).  The LP relaxation is far easier
+to solve than the original Boolean LP.
+
+\begin{enumerate}
+\item Show that the optimal value of the LP relaxation~(\ref{e-bool-lp-relax}) is a lower bound on the optimal value of the Boolean LP~(\ref{e-bool-lp}).  What can you say about the Boolean LP if the LP relaxation is infeasible?
+    
+\item It sometimes happens that the LP relaxation has a solution with $x_i \in \{ 0,1\}$.  What can you say in this case?
+\end{enumerate}
+
+{\bf{Answer:
+\begin{enumerate}
+    \item Assume $c^Tx_1$ is the optimal value of Boolean LP, then $0\leq x_{1i}\leq1$ since $x_{1i}\in\{0,1\}$
+    \\Therefore, $x_1$ satisfies LP relaxation's constraints.
+    \\Assume $c^Tx_2$ is the optimal value of LP relaxation, then $c^Tx_2\leq c^Tx_1$
+    \\Hence $c^Tx_2$ is a lower bound on the optimal value of the Boolean LP 
+    \\\\If LP relaxation is infeasible, then there is no x satisfying its constraints or dom.
+    \\The Boolean LP's feasible solution set is contained in the LP relaxation's, which is empty.
+    \\Hence Boolean LP's feasible solution set is also empty, and the problem is infeasible
+    \item The LP relaxation's optimal value is also Boolean LP's, and the solution happens to be both problems' optimal solution.
+\end{enumerate}
+}}
+
+\section*{Problem 3}\label{exe-sep-hyp-strict-counterexample}
+Consider the QCQP
+\[
+\begin{array}{ll}
+\mbox{minimize} & (1/2)x^T Px + q^T x + r \\
+\mbox{subject to} & x^T x \leqslant 1,
+\end{array}
+\]
+with $P\in\symm^n_{++}$.  Show that $x^\star = -(P+\lambda I)^{-1} q$
+where $\lambda = \max\{0, \bar \lambda\}$
+and $\bar\lambda$ is the largest solution of the nonlinear equation
+\[
+q^T (P+\lambda I)^{-2} q  = 1.
+\]
+
+
+{\bf{Answer:
+\\$(1/2)x^TPx+q^Tx+r=\frac{1}{2}(x+P^{-1}q)^TP(x+P^{-1}q)+r-\frac{1}{2}q^TP^{-1}q$
+\\So we just need to minimize $(x+P^{-1}q)^TP(x+P^{-1}q)=(Px+q)^TP^{-1}(Px+q)$
+\\Since $P\in\symm^n_{++},(Px+q)^TP^{-1}(Px+q)\geq0$, and it's minimal when $||Px+q||_2$ is minimal 
+\\Since $x$ is located in a unit circle, $||Px+q||_2$ is minimal when $Px+q=\lambda x,x=-(P+\lambda I)^{-1}q$
+\\\\When $\bar{\lambda}<0,q$ is the interior point of ellipsoid $q^TP^{-2}q\leq1$
+\\$x^Tx=q^TP^{-2}q\leq1$, satisfying the constraint 
+\\$\lambda=0,x=-P^{-1}q,(Px+q)^TP^{-1}(Px+q)=0$
+\\The optimal value is $r-\frac{1}{2}q^TP^{-1}q$
+\\\\When $\bar{\lambda}\geq0,q$ is a boundary point of a larger ellipsoid $q^T(P+\bar{\lambda}I)^{-2}q\leq1$ 
+\\$\forall \lambda<\bar{\lambda},q^T(P+\lambda I)^{-2}q=x^Tx>1$ because the axis is shorter
+\\$\forall \lambda>\bar{\lambda},||\lambda x||_2>||\bar{\lambda} x||_2$, so $||Px+q||_2$ is minimal when $\lambda=\bar{\lambda}$
+\\Therefore when $\lambda=\max\{0,\bar{\lambda}\}$, we can get the optimal value.
+}}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Reference
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
